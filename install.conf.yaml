@@ -4,10 +4,10 @@
 
 - clean: ['~']
 
-#- link:
-#    ~/.dotfiles: ''
+- link:
 #    ~/.vim: vim
 #    ~/.vimrc: vimrc
+     ~/.gitconfig:
 
 - create:
   - ~/dev
