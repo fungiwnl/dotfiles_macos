@@ -6,7 +6,7 @@
 
 - link:
 #    ~/.vim: vim
-#    ~/.vimrc: vimrc
+     ~/.vimrc:
      ~/.gitconfig:
 
 - create:
