@@ -14,4 +14,8 @@
   - ~/dev
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - command: [git submodule update --init --recursive, Installing submodules] 
+  - command: [zsh setup_homebrew.zsh, Installing homebrew]
+    stdout: true
+    stderr: true
+
