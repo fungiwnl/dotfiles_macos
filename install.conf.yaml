@@ -15,7 +15,11 @@
 
 - shell:
   - command: [zsh macos, Setting macOS settings]
-  - command: [git submodule update --init --recursive, Installing submodules] 
+    stdout: true
+    stderr: true
+  - command: [git submodule update --init --recursive, Installing submodules]
+    stdout: true
+    stderr: true
   - command: [zsh setup_homebrew.zsh, Installing homebrew]
     stdout: true
     stderr: true
