@@ -27,6 +27,10 @@ brew "exa"
 brew "httpie"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Pager program similar to more
+brew "less"
+# Mac App Store command-line interface
+brew "mas"
 # Platform built on V8 to build network applications
 brew "node"
 # Manage multiple Node.js versions
@@ -45,3 +49,5 @@ cask "chromedriver"
 cask "dropbox"
 # GraphQL IDE for better development workflows
 cask "graphql-playground"
+mas "1Password 7", id: 1333542190
+mas "Slack", id: 803453959
