@@ -43,8 +43,6 @@ brew "wget"
 brew "yarn"
 # Application launcher and productivity software
 cask "alfred"
-# Automated testing of webapps for Google Chrome
-cask "chromedriver"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # GraphQL IDE for better development workflows
