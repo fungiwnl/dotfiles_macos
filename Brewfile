@@ -23,6 +23,8 @@ brew "gnutls"
 brew "nghttp2"
 # Modern replacement for 'ls'
 brew "exa"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Lightweight and flexible command-line JSON processor
