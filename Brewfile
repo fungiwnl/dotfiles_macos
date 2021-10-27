@@ -49,5 +49,7 @@ cask "alfred"
 cask "dropbox"
 # GraphQL IDE for better development workflows
 cask "graphql-playground"
+# HTTP and GraphQL Client
+cask "insomnia"
 mas "1Password 7", id: 1333542190
 mas "Slack", id: 803453959
