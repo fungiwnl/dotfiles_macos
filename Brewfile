@@ -13,6 +13,8 @@ brew "python@3.9"
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cross-platform make
+brew "cmake"
 # GNU Ubiquitous Intelligent Language for Extensions
 brew "guile"
 # Validating, recursive, caching DNS resolver
@@ -39,6 +41,8 @@ brew "node"
 brew "nvm"
 # Python version management
 brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
