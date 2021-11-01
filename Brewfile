@@ -43,6 +43,8 @@ brew "nvm"
 brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
+# Feature-rich console based todo list manager
+brew "task"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
