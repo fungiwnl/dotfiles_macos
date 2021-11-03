@@ -27,6 +27,8 @@ brew "nghttp2"
 brew "exa"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
+# Improved top (interactive process viewer)
+brew "htop"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Lightweight and flexible command-line JSON processor
@@ -47,6 +49,8 @@ brew "pyenv-virtualenv"
 brew "task"
 # Simplified and community-driven man pages
 brew "tldr"
+# Terminal multiplexer
+brew "tmux"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
