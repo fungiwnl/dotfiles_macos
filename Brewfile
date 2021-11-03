@@ -45,6 +45,8 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 # Feature-rich console based todo list manager
 brew "task"
+# Simplified and community-driven man pages
+brew "tldr"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
