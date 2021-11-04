@@ -45,6 +45,8 @@ brew "nvm"
 brew "pyenv"
 # Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
 # Feature-rich console based todo list manager
 brew "task"
 # Simplified and community-driven man pages
