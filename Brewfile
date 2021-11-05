@@ -65,5 +65,7 @@ cask "dropbox"
 cask "graphql-playground"
 # HTTP and GraphQL Client
 cask "insomnia"
+# Free and open-source hosted hypervisor for x86 virtualization
+cask "virtualbox"
 mas "1Password 7", id: 1333542190
 mas "Slack", id: 803453959
