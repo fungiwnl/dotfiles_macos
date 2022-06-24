@@ -21,8 +21,8 @@ brew "guile"
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
-# HTTP/2 C Library
-brew "nghttp2"
+# GNU Emacs text editor
+brew "emacs"
 # Modern replacement for 'ls'
 brew "exa"
 # Play, record, convert, and stream audio and video
@@ -31,12 +31,18 @@ brew "ffmpeg"
 brew "htop"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
+# Load testing and performance measurement application
+brew "jmeter"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Pager program similar to more
 brew "less"
 # Mac App Store command-line interface
 brew "mas"
+# Media player based on MPlayer and mplayer2
+brew "mpv"
+# HTTP/2 C Library
+brew "nghttp2"
 # Platform built on V8 to build network applications
 brew "node"
 # Manage multiple Node.js versions
@@ -65,7 +71,9 @@ cask "dropbox"
 cask "graphql-playground"
 # HTTP and GraphQL Client
 cask "insomnia"
-# Free and open-source hosted hypervisor for x86 virtualization
+# Virtualizer for x86 hardware
 cask "virtualbox"
 mas "1Password 7", id: 1333542190
+mas "Developer", id: 640199958
 mas "Slack", id: 803453959
+mas "Xcode", id: 497799835
