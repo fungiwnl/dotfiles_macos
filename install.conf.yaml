@@ -5,13 +5,11 @@
 - clean: ['~']
 
 - link:
-#    ~/.vim: vim
-     ~/.vimrc:
      ~/.gitconfig:
-     ~/.hyper.js:
 
 - create:
-  - ~/dev
+  - ~/work
+  - ~/personal
 
 - shell:
   - command: [zsh macos, Setting macOS settings]
