@@ -5,20 +5,23 @@
 - clean: ['~']
 
 - link:
-     ~/.gitconfig:
+    ~/.zshrc: .zshrc
+    ~/zshrc: zshrc
+    ~/.gitconfig:
+    ~/.config/alacritty.toml: .config/alacritty/alacritty.toml
+    ~/.tmux.conf: .config/tmux/.tmux.conf
+    ~/.config/nvim: .config/nvim
 
 - create:
   - ~/work
-  - ~/personal
 
 - shell:
-  - command: [zsh macos, Setting macOS settings]
-    stdout: true
-    stderr: true
+  #- command: [zsh macos, Setting macOS settings]
+  #  stdout: true
+  #  stderr: true:cpu_quota: value
   - command: [git submodule update --init --recursive, Installing submodules]
     stdout: true
     stderr: true
   - command: [zsh setup_homebrew.zsh, Installing homebrew]
     stdout: true
     stderr: true
-
