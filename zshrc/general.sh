@@ -15,4 +15,6 @@ alias ta="tmux attach"
 alias td="tmux detach"
 alias diff="diff --color"
 alias lg="lazygit"
-alias bbd="brew bundle dump --describe --file=~/.dotfiles/Brewfile --force"
+alias bbd="brew bundle dump --describe --file=~/dotfiles_macos/Brewfile --force"
+alias glog='git log --oneline | fzf --preview "git show --color=always {1}"'
+alias fkill='kill -9 $(ps aux | fzf -m | awk "{print $2}")'

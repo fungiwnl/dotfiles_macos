@@ -305,5 +305,6 @@ mas "1Password 7", id: 1333542190
 mas "Developer", id: 640199958
 mas "Seashore", id: 1448648921
 mas "Slack", id: 803453959
+mas "Tyme", id: 1461456897
 mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835

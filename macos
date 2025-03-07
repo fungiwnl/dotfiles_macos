@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # Ask for the administrator password upfront
@@ -38,8 +40,8 @@ chflags nohidden ~/Library
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool true
 
-printf "Note: some changes require a logout/restart to take effect!"
-printf "Restarting system applications. . ."
+printf "Note: some changes require a logout/restart to take effect!\n"
+printf "Restarting system applications...\n"
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer"

@@ -11,4 +11,4 @@ else
 fi
 
 echo "\n<<< Running Brew bundle >>>\n"
-brew bundle --verbose
+brew bundle --verbose --no-upgrade
