@@ -1,26 +1,22 @@
--- add tsserver and setup with typescript.nvim instead of lspconfig
+-- Optimized TypeScript LSP config using vtsls for monorepo support
 return {
   "neovim/nvim-lspconfig",
-  dependencies = {
-    "jose-elias-alvarez/typescript.nvim",
-    init = function()
-      require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-        vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-      end)
-    end,
-  },
-  ---@class PluginLspOpts
   opts = {
-    -- make sure mason installs the server
     servers = {
-      tsserver = {
-        enabled = false,
-      },
+      -- Disable legacy tsserver
+      tsserver = { enabled = false },
+
       vtsls = {
-        -- explicitly add default filetypes, so that we can extend
-        -- them in related extras
+        -- Force project-based loading (prevents multiple instances)
+        single_file_support = false,
+
+        -- Monorepo root detection
+        root_dir = function(fname)
+          return require("lspconfig.util").root_pattern("pnpm-workspace.yaml", "lerna.json", "nx.json", "turbo.json")(
+            fname
+          ) or require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json", "package.json")(fname)
+        end,
+
         filetypes = {
           "javascript",
           "javascriptreact",
@@ -29,15 +25,20 @@ return {
           "typescriptreact",
           "typescript.tsx",
         },
+
         settings = {
           complete_function_calls = true,
           vtsls = {
             enableMoveToFileCodeAction = true,
             autoUseWorkspaceTsdk = true,
+            tsserver = {
+              globalPlugins = {},
+            },
             experimental = {
               completion = {
-                enableServerSideFuzzyMatch = true,
+                enableServerSideFuzzyMatch = false,
               },
+              maxInlayHintLength = 30,
             },
           },
           typescript = {
@@ -45,16 +46,29 @@ return {
             suggest = {
               completeFunctionCalls = true,
             },
+            preferences = {
+              includePackageJsonAutoImports = "auto",
+            },
+            tsserver = {
+              maxTsServerMemory = 8192,
+              watchOptions = {
+                watchFile = "useFsEvents",
+                watchDirectory = "useFsEvents",
+                fallbackPolling = "dynamicPriorityPolling",
+              },
+            },
+            -- Inlay hints disabled by default - toggle with <leader>uh when needed
             inlayHints = {
-              enumMemberValues = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              parameterNames = { enabled = "literals" },
-              parameterTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
+              enumMemberValues = { enabled = false },
+              functionLikeReturnTypes = { enabled = false },
+              parameterNames = { enabled = "none" },
+              parameterTypes = { enabled = false },
+              propertyDeclarationTypes = { enabled = false },
               variableTypes = { enabled = false },
             },
           },
         },
+
         keys = {
           {
             "gD",
@@ -109,15 +123,14 @@ return {
         },
       },
     },
+
     setup = {
       tsserver = function()
-        -- disable tsserver
-        return true
+        return true -- disable tsserver
       end,
       vtsls = function(_, opts)
         LazyVim.lsp.on_attach(function(client, buffer)
           client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
-            ---@type string, string, lsp.Range
             local action, uri, range = unpack(command.arguments)
 
             local function move(newf)
@@ -141,7 +154,6 @@ return {
                 },
               },
             }, function(_, result)
-              ---@type string[]
               local files = result.body.files
               table.insert(files, 1, "Enter new path...")
               vim.ui.select(files, {
@@ -165,7 +177,7 @@ return {
             end)
           end
         end, "vtsls")
-        -- copy typescript settings to javascript
+        -- Copy typescript settings to javascript
         opts.settings.javascript =
           vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
       end,
