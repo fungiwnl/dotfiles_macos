@@ -5,38 +5,56 @@ return {
     "debugloop/telescope-undo.nvim",
   },
   config = function()
+    local rg_ignore_file = vim.fn.stdpath("config") .. "/.telescope_ignore"
+    local find_files_command = {
+      "rg",
+      "--files",
+      "--hidden",
+      "--no-ignore-vcs",
+      "--ignore-file",
+      rg_ignore_file,
+    }
+
     require("telescope").setup({
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { prompt_position = "top" },
+        sorting_strategy = "ascending",
+        winblend = 0,
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+          "--no-ignore-vcs",
+          "--ignore-file",
+          rg_ignore_file,
+        },
+        file_ignore_patterns = {
+          "%.git/",
+          "node_modules/",
+        },
+      },
       pickers = {
         find_files = {
-          find_command = { "rg", "--files", "--iglob", "!.git", "--hidden" },
-        },
-        grep_string = {
-          additional_args = { "--hidden" },
-        },
-        live_grep = {
-          additional_args = { "--hidden" },
+          find_command = find_files_command,
         },
       },
-      keys = {},
-      -- change some options
-      opts = {
-        defaults = {
-          layout_strategy = "horizontal",
-          layout_config = { prompt_position = "top" },
-          sorting_strategy = "ascending",
-          winblend = 0,
-        },
-      },
-
       extensions = {
-        undo = {
-          -- telescope-undo.nvim config, see below
-        },
-        -- other extensions:
-        -- file_browser = { ... }
+        undo = {},
       },
     })
     require("telescope").load_extension("undo")
     vim.keymap.set("n", "<leader>ut", "<cmd>Telescope undo<cr>")
+    vim.keymap.set("n", "<leader><space>", function()
+      require("telescope.builtin").find_files({
+        cwd = require("lazyvim.util").root(),
+        find_command = find_files_command,
+      })
+    end, { desc = "Find Files (Root Dir)" })
   end,
 }
