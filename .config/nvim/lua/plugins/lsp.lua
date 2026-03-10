@@ -1,21 +1,21 @@
--- Optimized TypeScript LSP config using vtsls for monorepo support
 return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
       -- Disable legacy tsserver
       tsserver = { enabled = false },
+      ts_ls = { enabled = false },
 
       vtsls = {
         -- Force project-based loading (prevents multiple instances)
         single_file_support = false,
 
         -- Monorepo root detection
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("pnpm-workspace.yaml", "lerna.json", "nx.json", "turbo.json")(
-            fname
-          ) or require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json", "package.json")(fname)
-        end,
+        --root_dir = function(fname)
+        --  return require("lspconfig.util").root_pattern("pnpm-workspace.yaml", "lerna.json", "nx.json", "turbo.json")(
+        --    fname
+        --  ) or require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json", "package.json")(fname)
+        --end,
 
         filetypes = {
           "javascript",
@@ -57,7 +57,6 @@ return {
                 fallbackPolling = "dynamicPriorityPolling",
               },
             },
-            -- Inlay hints disabled by default - toggle with <leader>uh when needed
             inlayHints = {
               enumMemberValues = { enabled = false },
               functionLikeReturnTypes = { enabled = false },
@@ -128,8 +127,9 @@ return {
       tsserver = function()
         return true -- disable tsserver
       end,
+
       vtsls = function(_, opts)
-        LazyVim.lsp.on_attach(function(client, buffer)
+        Snacks.util.lsp.on({ name = "vtsls" }, function(buffer, client)
           client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
             local action, uri, range = unpack(command.arguments)
 
@@ -154,7 +154,7 @@ return {
                 },
               },
             }, function(_, result)
-              local files = result.body.files
+              local files = result and result.body and result.body.files or {}
               table.insert(files, 1, "Enter new path...")
               vim.ui.select(files, {
                 prompt = "Select move destination:",
@@ -168,7 +168,9 @@ return {
                     default = vim.fn.fnamemodify(fname, ":h") .. "/",
                     completion = "file",
                   }, function(newf)
-                    return newf and move(newf)
+                    if newf then
+                      move(newf)
+                    end
                   end)
                 elseif f then
                   move(f)
@@ -176,8 +178,8 @@ return {
               end)
             end)
           end
-        end, "vtsls")
-        -- Copy typescript settings to javascript
+        end)
+
         opts.settings.javascript =
           vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
       end,

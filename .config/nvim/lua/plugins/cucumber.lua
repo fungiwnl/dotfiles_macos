@@ -1,28 +1,39 @@
 -- lua/plugins/cucumber.lua
 return {
-  -- LSP config
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
         cucumber_language_server = {
-          filetypes = { "cucumber", "feature" },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "cucumber.yml",
-              "cucumber.yaml",
-              ".cucumber.yml",
-              ".cucumber.yaml",
-              "package.json"
-            )(fname)
+          cmd = { "cucumber-language-server", "--stdio" },
+          filetypes = { "cucumber" },
+          root_dir = function(arg1, on_dir)
+            local util = require("lspconfig.util")
+            local fname = type(arg1) == "number" and vim.api.nvim_buf_get_name(arg1) or arg1
+            local root = util.root_pattern(
+              "cucumber.json",
+              "cucumber.js",
+              "cucumber.cjs",
+              "cucumber.mjs",
+              "package.json",
+              "tsconfig.json",
+              "pnpm-workspace.yaml",
+              "yarn.lock",
+              "package-lock.json",
+              ".git"
+            )(fname) or vim.fs.dirname(fname)
+
+            if on_dir then
+              on_dir(root)
+            end
+
+            return root
           end,
+          single_file_support = true,
           settings = {
             cucumber = {
-              features = { "**/*.feature" },
-              glue = {
-                "src/steps/**/*.ts",
-                "src/steps/*steps.ts",
-              },
+              features = { "src/features/**/*.feature" },
+              glue = { "src/steps/**/*.ts" },
             },
           },
         },
