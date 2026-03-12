@@ -213,6 +213,8 @@ cask "brave-browser"
 cask "bruno"
 # Anthropic's official Claude AI desktop app
 cask "claude"
+# Automation tool for macOS scripting
+cask "hammerspoon"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
 # Multi-platform web browser

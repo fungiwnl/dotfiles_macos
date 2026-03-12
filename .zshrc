@@ -1,3 +1,5 @@
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 for FILE in ~/zshrc/*; do
     source $FILE
 done
