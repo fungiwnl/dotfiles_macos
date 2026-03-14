@@ -81,6 +81,8 @@ brew "tesseract"
 brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
+# DuckDuckGo from the terminal
+brew "ddgr"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Command-line fuzzy finder written in Go
@@ -193,6 +195,8 @@ brew "tmux"
 brew "tree"
 # Internet file retriever
 brew "wget"
+# Text-based web browser
+brew "w3m"
 # JavaScript package manager
 brew "yarn"
 # Custom macOS statusbar with shell plugin, interaction and graph support

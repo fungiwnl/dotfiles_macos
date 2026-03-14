@@ -3,3 +3,5 @@
 !.github/**
 !.buildkite/
 !.buildkite/**
+!.config/
+!.config/**
