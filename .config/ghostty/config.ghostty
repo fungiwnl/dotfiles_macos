@@ -1,0 +1,204 @@
+# Ghostty configuration
+#
+# Ghostty uses a very small `key = value` format.
+# A few important rules to remember while you learn it:
+#
+# - Keys are lowercase and case-sensitive.
+# - Values can usually be quoted or unquoted.
+# - Comments only work on their own line.
+# - Repeating a key is valid for options like `palette` or `font-family`.
+# - An empty value resets a setting back to Ghostty's default.
+#
+# On macOS, Ghostty can read both the native macOS path and the XDG path.
+# This file lives in the XDG path, which makes it easy to keep in dotfiles and
+# symlink from `~/.config/ghostty` just like other terminal configs.
+
+# -----------------------------------------------------------------------------
+# Fonts
+# -----------------------------------------------------------------------------
+# `font-family` sets the main terminal typeface.
+#
+# Ghostty ships with a solid default font, but setting this explicitly keeps the
+# look aligned with your existing Alacritty setup.
+#
+# If you ever want fallbacks, you can repeat `font-family` multiple times.
+# Ghostty will try them in order.
+font-family = "FiraCode Nerd Font"
+
+# Font size is in points, not pixels.
+#
+# 14 is a comfortable coding size and matches your current terminal preference.
+# You can still adjust it live with Ghostty's zoom controls without editing the
+# file.
+font-size = 14
+
+# -----------------------------------------------------------------------------
+# Theme and core colors
+# -----------------------------------------------------------------------------
+# This palette is Catppuccin Mocha.
+#
+# The first sixteen `palette` entries define the ANSI colors used by terminal
+# applications for "black, red, green..." and their bright variants.
+#
+# Many CLI tools only know about these sixteen slots, so setting them is the
+# most important part of a terminal theme.
+palette = 0=#45475a
+palette = 1=#f38ba8
+palette = 2=#a6e3a1
+palette = 3=#f9e2af
+palette = 4=#89b4fa
+palette = 5=#f5c2e7
+palette = 6=#94e2d5
+palette = 7=#a6adc8
+palette = 8=#585b70
+palette = 9=#f37799
+palette = 10=#89d88b
+palette = 11=#ebd391
+palette = 12=#74a8fc
+palette = 13=#f2aede
+palette = 14=#6bd7ca
+palette = 15=#bac2de
+
+# `background` and `foreground` are the window's default text colors.
+#
+# Catppuccin Mocha uses a soft blue-gray foreground on a deep navy-plum
+# background. It stays dark without going fully black, which tends to look
+# better once transparency and blur are enabled.
+background = #1e1e2e
+foreground = #cdd6f4
+
+# Cursor styling is split into multiple settings.
+#
+# `cursor-color` is the cursor itself, and `cursor-text` is the color of the
+# glyph under a block cursor. Keeping good contrast here makes the cursor easy
+# to spot during coding sessions.
+cursor-color = #f5e0dc
+cursor-text = #1e1e2e
+cursor-style = block
+
+# Selection colors are separate from normal foreground/background colors.
+#
+# This is useful because a good theme often wants a subtle selection that still
+# keeps code readable.
+selection-background = #585b70
+selection-foreground = #cdd6f4
+
+# -----------------------------------------------------------------------------
+# Transparent dark coding look
+# -----------------------------------------------------------------------------
+# `background-opacity` controls how solid the terminal background is.
+#
+# 1.0 means fully opaque.
+# Lower values let desktop content show through.
+#
+# A value around 0.88 keeps the theme readable while still giving the window a
+# softer, layered look.
+background-opacity = 0.88
+
+# By default, many terminals only apply transparency to the base window
+# background and not to cells that programs repaint themselves.
+#
+# Turning this on makes applications like Neovim and Tmux respect the same
+# transparent feel instead of drawing a fully opaque rectangle on top.
+background-opacity-cells = true
+
+# Blur only matters when opacity is below 1.
+#
+# On macOS, a moderate blur helps the text stay readable by softening whatever
+# is behind the terminal window.
+#
+# `true` uses Ghostty's default blur strength, but using a number makes the
+# choice explicit and easier to tune later.
+background-blur = 20
+
+# Padding gives the text breathing room so the terminal feels less cramped.
+#
+# These values are in points and affect new windows.
+# `window-padding-balance = true` helps Ghostty distribute leftover space more
+# evenly so the grid feels centered instead of stuck to one edge.
+window-padding-x = 14
+window-padding-y = 12
+window-padding-balance = true
+
+# `extend` tries to make the padding visually blend into the edge cells instead
+# of always painting the plain background color.
+#
+# This tends to look especially nice with editors, prompts, and full-screen TUIs.
+window-padding-color = extend
+
+# -----------------------------------------------------------------------------
+# macOS behavior
+# -----------------------------------------------------------------------------
+# `macos-titlebar-style = transparent` lets the terminal background visually run
+# into the titlebar area, which matches the transparent aesthetic you asked for.
+#
+# If you ever want the most stock macOS look, switch this to `native`.
+# If you want no visible titlebar but still keep rounded corners, try `hidden`.
+macos-titlebar-style = transparent
+
+# This tells Ghostty to treat the macOS Option key like a traditional terminal
+# Alt key.
+#
+# That makes many shell and terminal shortcuts behave more like they do on Linux
+# and other terminal emulators.
+#
+# If you rely heavily on macOS Option-based special character entry, you can set
+# this to `left` or `right` later and keep one side for Unicode input.
+macos-option-as-alt = true
+
+# `window-theme` influences how Ghostty presents the surrounding window chrome.
+# Setting `dark` keeps the window treatment aligned with this dark theme.
+window-theme = dark
+
+# Save and restore the last window state on macOS.
+#
+# This includes things like window size and layout, and it pairs well with shell
+# integration because Ghostty can better preserve working directories.
+window-save-state = always
+
+# -----------------------------------------------------------------------------
+# Shell integration
+# -----------------------------------------------------------------------------
+# Ghostty can automatically inject shell integration scripts.
+#
+# `detect` is the safe default: Ghostty detects your shell and enables useful
+# features without hard-coding you to bash, zsh, fish, etc.
+shell-integration = detect
+
+# These features are practical without being overly magical:
+#
+# - `cursor` makes the prompt cursor behavior smarter.
+# - `sudo` preserves terminfo details more reliably.
+# - `title` allows shell-aware window titles.
+# - `ssh-env` helps remote sessions degrade more gracefully.
+# - `path` keeps the Ghostty binary available in PATH if macOS shell startup
+#   scripts rewrite PATH.
+shell-integration-features = cursor,sudo,title,ssh-env,path
+
+# New windows, tabs, and splits feel more natural when they inherit the current
+# working directory instead of always starting from your home directory.
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# -----------------------------------------------------------------------------
+# Quality-of-life keybinds
+# -----------------------------------------------------------------------------
+# Ghostty keybinds use `trigger=action`.
+#
+# These two bindings mirror the Alt+Left / Alt+Right shell word-jump behavior
+# you already had in Alacritty by sending the same classic escape sequences that
+# many shells and readline-style programs understand.
+keybind = alt+left=esc:b
+keybind = alt+right=esc:f
+
+# -----------------------------------------------------------------------------
+# Notes for future experimentation
+# -----------------------------------------------------------------------------
+# Some easy next things to try later without restructuring the file:
+#
+# - Add `theme = Some Built In Theme` if you want to compare built-in themes.
+# - Repeat `font-family = ...` to add fallback fonts.
+# - Change `background-opacity` up or down in small 0.02 steps.
+# - Switch `window-padding-color` between `background` and `extend`.
+# - Split the config into multiple files later with `config-file = relative/path`.
