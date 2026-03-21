@@ -15,4 +15,4 @@ sketchybar --add item spotify right \
     label.max_chars=20 \
     scroll_texts=off \
     click_script="open -a Spotify" \
-  --subscribe spotify system_woke
+  --subscribe spotify system_woke front_app_switched
