@@ -30,7 +30,9 @@ sketchybar --bar \
 
 sketchybar --default \
   updates=when_shown \
-  icon.drawing=off \
+  icon.drawing=on \
+  icon.font="FiraCode Nerd Font Mono:Regular:23.0" \
+  icon.color="$TEXT" \
   label.color="$TEXT" \
   label.highlight_color="$TEXT" \
   label.font="SF Pro Text:Semibold:13.0" \
@@ -48,7 +50,7 @@ sketchybar --add event aerospace_workspace_change
 
 source "$ITEM_DIR/workspaces.sh"
 source "$ITEM_DIR/front_app.sh"
-source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/right.sh"
+source "$ITEM_DIR/spotify.sh"
 
 sketchybar --update

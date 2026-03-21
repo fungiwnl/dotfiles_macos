@@ -11,7 +11,7 @@ user_pct="$(printf '%s\n' "$cpu_line" | awk -F'%' '{gsub(/^ +| +$/, "", $1); pri
 sys_pct="$(printf '%s\n' "$cpu_line" | awk -F'[, %]+' '{print int($4 + 0.5)}')"
 
 if [[ -z "$user_pct" || -z "$sys_pct" ]]; then
-  "$SKETCHYBAR_BIN" --set "$NAME" label="CPU --"
+  "$SKETCHYBAR_BIN" --set "$NAME" icon=$'\uf2db' label="--"
   exit 0
 fi
 
@@ -24,4 +24,4 @@ elif (( total_pct >= 65 )); then
   color="$WARNING"
 fi
 
-"$SKETCHYBAR_BIN" --set "$NAME" label="CPU ${total_pct}%" label.color="$color"
+  "$SKETCHYBAR_BIN" --set "$NAME" icon=$'\uf2db' label="${total_pct}%" label.color="$color"

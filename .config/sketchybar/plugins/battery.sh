@@ -13,10 +13,15 @@ if [[ -z "$percentage" ]]; then
   percentage="--"
 fi
 
-prefix="BAT"
+on_ac=false
+if printf '%s\n' "$battery_info" | grep -qi "drawing from 'AC Power'"; then
+  on_ac=true
+fi
 
-if printf '%s' "$battery_info" | grep -qi 'AC Power\|charging\|charged'; then
-  prefix="AC"
+if [[ "$on_ac" == "true" ]]; then
+  icon=$'\uf0e7'
+else
+  icon=$'\uf240'
 fi
 
 color="$TEXT"
@@ -27,9 +32,9 @@ if [[ "$percentage" != "--" ]]; then
   elif (( percentage <= 40 )); then
     color="$WARNING"
   fi
-  label="$prefix $percentage%"
+  label="$percentage%"
 else
-  label="$prefix --"
+  label="--"
 fi
 
-"$SKETCHYBAR_BIN" --set "$NAME" label="$label" label.color="$color"
+"$SKETCHYBAR_BIN" --set "$NAME" icon="$icon" label="$label" label.color="$color"

@@ -6,58 +6,37 @@ SKETCHYBAR_BIN="${SKETCHYBAR_BIN:-/opt/homebrew/bin/sketchybar}"
 
 source "$CONFIG_DIR/colors.sh"
 
-to_bytes() {
-  local value="$1"
-  local number unit scale
+get_memory_usage() {
+    local total_mem_bytes used_kb usage_pct
 
-  if [[ ! "$value" =~ ^([0-9]+([.][0-9]+)?)([KMGTP])$ ]]; then
-    return 1
-  fi
+    total_mem_bytes=$(sysctl -n hw.memsize 2>/dev/null || return 1)
+    used_kb=$(ps -eo rss= 2>/dev/null | awk '{sum+=$1} END {print sum}')
 
-  number="${BASH_REMATCH[1]}"
-  unit="${BASH_REMATCH[3]}"
+    if [[ -z "$used_kb" ]] || [[ "$used_kb" -eq 0 ]]; then
+        return 1
+    fi
 
-  case "$unit" in
-    K) scale=1024 ;;
-    M) scale=1048576 ;;
-    G) scale=1073741824 ;;
-    T) scale=1099511627776 ;;
-    P) scale=1125899906842624 ;;
-    *) return 1 ;;
-  esac
+    usage_pct=$(awk -v used="$used_kb" -v total="$total_mem_bytes" 'BEGIN {
+        used_bytes = used * 1024
+        printf "%d", (used_bytes / total) * 100 + 0.5
+    }')
 
-  awk -v n="$number" -v s="$scale" 'BEGIN { printf "%.0f", n * s }'
+    echo "$usage_pct"
 }
 
-mem_line="$(top -l 1 -n 0 | awk -F': ' '/PhysMem/ {print $2; exit}')"
-used_mem="$(printf '%s\n' "$mem_line" | awk -F' used' '{print $1}')"
-total_mem_bytes="$(sysctl -n hw.memsize 2>/dev/null || true)"
-
-if [[ -z "$used_mem" || -z "$total_mem_bytes" ]]; then
-  "$SKETCHYBAR_BIN" --set "$NAME" label="MEM --"
-  exit 0
-fi
-
-used_mem_bytes="$(to_bytes "$used_mem")"
-
-if [[ -z "$used_mem_bytes" ]]; then
-  "$SKETCHYBAR_BIN" --set "$NAME" label="MEM --"
-  exit 0
-fi
-
-usage_pct="$(awk -v used="$used_mem_bytes" -v total="$total_mem_bytes" 'BEGIN { if (total > 0) printf "%d", (used / total) * 100 + 0.5 }')"
+usage_pct=$(get_memory_usage)
 
 if [[ -z "$usage_pct" ]]; then
-  "$SKETCHYBAR_BIN" --set "$NAME" label="MEM --"
-  exit 0
+    "$SKETCHYBAR_BIN" --set "$NAME" icon=$'\uf1c0' label="--" label.color="$TEXT"
+    exit 0
 fi
 
 color="$TEXT"
 
-if (( usage_pct >= 90 )); then
-  color="$CRITICAL"
-elif (( usage_pct >= 75 )); then
-  color="$WARNING"
+if (( usage_pct >= 95 )); then
+    color="$CRITICAL"
+elif (( usage_pct >= 80 )); then
+    color="$WARNING"
 fi
 
-"$SKETCHYBAR_BIN" --set "$NAME" label="MEM ${usage_pct}%" label.color="$color"
+"$SKETCHYBAR_BIN" --set "$NAME" icon=$'\uf1c0' label="${usage_pct}%" label.color="$color"

@@ -2,26 +2,59 @@
     link:
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.zshrc: .zshrc
     ~/zshrc: zshrc
     ~/.gitconfig:
+    ~/.hammerspoon: .hammerspoon
+    ~/.config/aerospace: .config/aerospace
     ~/.config/alacritty.toml: .config/alacritty/alacritty.toml
+    ~/.config/ghostty: .config/ghostty
+    ~/.config/sketchybar: .config/sketchybar
     ~/.tmux.conf: .config/tmux/.tmux.conf
     ~/.config/nvim: .config/nvim
+    ~/.config/opencode/opencode.json: .config/opencode/opencode.json
+    ~/.config/opencode/tui.json: .config/opencode/tui.json
+    ~/.config/opencode/commands/save.md: .config/opencode/commands/save.md
+    ~/.config/opencode/themes/catppuccin-mocha-ghostty.json: .config/opencode/themes/catppuccin-mocha-ghostty.json
+    ~/.config/opencode/plugins/session-alerts.js: .config/opencode/plugins/session-alerts.js
+    ~/.ssh/KmartCAs.pem: certs/KmartCAs.pem
 
 - create:
-  - ~/work
+    - ~/.config
+    - ~/.config/sketchybar
+    - ~/.config/opencode/plugins
+    - ~/.config/opencode/commands
+    - ~/.config/opencode/themes
+    - ~/dev
 
 - shell:
-  #- command: [zsh macos, Setting macOS settings]
-  #  stdout: true
-  #  stderr: true:cpu_quota: value
-  - command: [git submodule update --init --recursive, Installing submodules]
-    stdout: true
-    stderr: true
-  - command: [zsh setup_homebrew.zsh, Installing homebrew]
-    stdout: true
-    stderr: true
+    - command: [zsh macos, Setting macOS settings]
+      stdout: true
+      stderr: true
+    - command: [git submodule update --init --recursive, Installing submodules]
+      stdout: true
+      stderr: true
+    - command: [zsh setup_homebrew.zsh, Installing homebrew]
+      stdout: true
+      stderr: true
+    - command: [bash setup_tmux_plugins.sh, Installing tmux plugins]
+      stdout: true
+      stderr: true
+    - command: [zsh setup_gcloud.zsh, Installing Google Cloud CLI]
+      stdout: true
+      stderr: true
+    - command: [zsh setup_power10k.zsh]
+      stdout: true
+      stderr: true
+    - command: [zsh -i setup_ssh.zsh, Setting up SSH]
+      stdout: true
+      stderr: true
+    - command: [bash -i setup_npmrc.sh, Setting up .npmrc]
+      stdout: true
+      stderr: true
+    - command: [zsh setup_repos.sh]
+      stdout: true
+      stderr: true

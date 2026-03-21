@@ -15,9 +15,11 @@ if [[ -z "$volume" ]]; then
 fi
 
 if [[ "$volume" == "--" ]]; then
-  label="VOL --"
+  icon=$'\uf6a9'
+  label="--"
 else
-  label="VOL $volume%"
+  icon=$'\uf028'
+  label="$volume%"
 fi
 
-"$SKETCHYBAR_BIN" --set "$NAME" label="$label"
+"$SKETCHYBAR_BIN" --set "$NAME" icon="$icon" label="$label"
