@@ -23,7 +23,7 @@
 #
 # If you ever want fallbacks, you can repeat `font-family` multiple times.
 # Ghostty will try them in order.
-font-family = "FiraCode Nerd Font"
+font-family = "FiraCode Nerd Font Mono"
 
 # Font size is in points, not pixels.
 #
