@@ -1,5 +1,8 @@
+.env
+.nvimlog
 kmart.sh
 .DS_Store
 Brewfile.lock.json
 plugin/packer_compiled.lua
 Session.vim
+setup_repos.zsh

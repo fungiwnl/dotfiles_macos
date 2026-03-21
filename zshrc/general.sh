@@ -1,6 +1,14 @@
 eval "$(fnm env --use-on-cd --shell zsh)"
 source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
+    source "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+    source "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
 export PNPM_HOME="/Users/$USER/Library/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
@@ -31,6 +39,18 @@ alias glog='git log --oneline | fzf --preview "git show --color=always {1}"'
 alias fkill='kill -9 $(ps aux | fzf -m | awk "{print $2}")'
 alias screenrecord="osascript -e 'tell application \"QuickTime Player\" to activate' -e 'tell application \"QuickTime Player\" to start (new screen recording)'"
 alias force-update="bash ~/dotfiles_macos/scripts/force-update.sh"
+
+browsh() {
+    local browsh_bin
+    browsh_bin="$(whence -p browsh 2>/dev/null || true)"
+
+    if [[ -n "$browsh_bin" ]]; then
+        "$browsh_bin" "$@"
+        return
+    fi
+
+    docker run --rm -it browsh/browsh "$@"
+}
 
 #Share shell history across tmux sessions
 setopt INC_APPEND_HISTORY  # Append commands to history file immediately
