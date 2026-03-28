@@ -8,7 +8,7 @@ source "$CONFIG_DIR/colors.sh"
 
 cpu_line="$(top -l 1 -n 0 | awk -F': ' '/CPU usage/ {print $2; exit}')"
 user_pct="$(printf '%s\n' "$cpu_line" | awk -F'%' '{gsub(/^ +| +$/, "", $1); print int($1 + 0.5)}')"
-sys_pct="$(printf '%s\n' "$cpu_line" | awk -F'[, %]+' '{print int($4 + 0.5)}')"
+sys_pct="$(printf '%s\n' "$cpu_line" | awk -F'[, %]+' '{print int($3 + 0.5)}')"
 
 if [[ -z "$user_pct" || -z "$sys_pct" ]]; then
   "$SKETCHYBAR_BIN" --set "$NAME" icon=$'\uf2db' label="--"
