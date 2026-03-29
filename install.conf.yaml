@@ -14,6 +14,7 @@
     ~/.config/alacritty.toml: .config/alacritty/alacritty.toml
     ~/.config/ghostty: .config/ghostty
     ~/.config/sketchybar: .config/sketchybar
+    ~/.config/spicetify: .config/spicetify
     ~/.tmux.conf: .config/tmux/.tmux.conf
     ~/.config/nvim: .config/nvim
     ~/.config/opencode/opencode.json: .config/opencode/opencode.json
@@ -57,5 +58,8 @@
       stdout: true
       stderr: true
     - command: [zsh setup_repos.sh]
+      stdout: true
+      stderr: true
+    - command: [if command -v spicetify >/dev/null 2>&1; then spicetify backup apply; fi, Applying Spicetify]
       stdout: true
       stderr: true
