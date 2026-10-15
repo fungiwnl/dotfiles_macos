@@ -83,3 +83,13 @@ rgh() {
     rg --no-heading --with-filename --line-number --column --smart-case --hidden --no-ignore-dot --glob '!.git/**' --glob '!node_modules/**' "$@"
 }
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+google() {
+    if [ $# -eq 0 ]; then
+        open -a "Brave Browser" "https://www.google.com"
+        return
+    fi
+    local query
+    query=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote_plus(" ".join(sys.argv[1:])))' "$@")
+    open -a "Brave Browser" "https://www.google.com/search?q=$query"
+}
