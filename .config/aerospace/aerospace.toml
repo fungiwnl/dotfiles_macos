@@ -11,6 +11,8 @@ gaps.outer.left = 0
 gaps.inner.horizontal = 0
 gaps.inner.vertical = 0
 
+accordion-padding = 0
+
 [mode.main.binding]
 
 alt-1 = 'workspace 1'
@@ -79,16 +81,53 @@ alt-shift-z = 'move-node-to-workspace Z --focus-follows-window'
 
 alt-tab = 'workspace-back-and-forth'
 
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-enter = 'fullscreen'
+alt-shift-space = 'layout floating tiling'
+
 [workspace-to-monitor-force-assignment]
-1 = '2'
-2 = '2'
-3 = '1'
-4 = '1'
-5 = 'main'
-6 = ['secondary', 'main']
-7 = ['secondary', 'main']
-8 = ['secondary', 'main']
-9 = ['secondary', 'main']
+1 = ['secondary', 'main']
+2 = ['secondary', 'main']
+3 = ['main', 'secondary']
+4 = ['main', 'secondary']
+5 = ['main', 'secondary']
+6 = ['main', 'secondary']
+7 = ['main', 'secondary']
+8 = ['main', 'secondary']
+9 = ['main', 'secondary']
+A = ['main', 'secondary']
+B = ['main', 'secondary']
+C = ['main', 'secondary']
+D = ['main', 'secondary']
+E = ['main', 'secondary']
+F = ['main', 'secondary']
+G = ['main', 'secondary']
+I = ['main', 'secondary']
+M = ['main', 'secondary']
+N = ['main', 'secondary']
+O = ['main', 'secondary']
+P = ['main', 'secondary']
+Q = ['main', 'secondary']
+R = ['main', 'secondary']
+S = ['main', 'secondary']
+T = ['main', 'secondary']
+U = ['main', 'secondary']
+V = ['main', 'secondary']
+W = ['main', 'secondary']
+X = ['main', 'secondary']
+Y = ['main', 'secondary']
+Z = ['main', 'secondary']
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
@@ -105,3 +144,7 @@ run = 'move-node-to-workspace 3 --focus-follows-window'
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 run = 'move-node-to-workspace 4 --focus-follows-window'
+
+[[on-window-detected]]
+if.app-id = 'com.agilebits.onepassword7'
+run = 'layout floating'
