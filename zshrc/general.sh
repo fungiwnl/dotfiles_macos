@@ -40,6 +40,17 @@ alias fkill='kill -9 $(ps aux | fzf -m | awk "{print $2}")'
 alias screenrecord="osascript -e 'tell application \"QuickTime Player\" to activate' -e 'tell application \"QuickTime Player\" to start (new screen recording)'"
 alias force-update="bash ~/dotfiles_macos/scripts/force-update.sh"
 
+# Toggle sleep entirely (incl. lid closed, on battery). caffeinate can't stop clamshell sleep.
+nosleep_toggle() {
+    if pmset -g | grep -q 'SleepDisabled[[:space:]]*1'; then
+        sudo pmset -a disablesleep 0 && echo "😴 Sleep enabled"
+    else
+        sudo pmset -a disablesleep 1 && echo "☕ Sleep disabled (lid closed won't sleep)"
+    fi
+}
+
+alias nosleep="nosleep_toggle"
+
 browsh() {
     local browsh_bin
     browsh_bin="$(whence -p browsh 2>/dev/null || true)"
