@@ -1,0 +1,11 @@
+# Included only while on the office network, where SSH to GitHub is blocked.
+# The precmd hook that links it lives in the gitignored zshrc/kmart.sh.
+# Rewrites SSH remotes to HTTPS and auths via gh.
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+	insteadOf = ssh://git@github.com/
+	insteadOf = git-github-m3:
+	insteadOf = git@git-github-m3:
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

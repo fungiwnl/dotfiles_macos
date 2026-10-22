@@ -3,3 +3,5 @@
 	name = Brian Fung
 [safe]
 	directory = /Users/bfung/work/ko-ui-lib
+[include]
+	path = ~/.gitconfig-office
