@@ -37,6 +37,9 @@ return {
         file_ignore_patterns = {
           "%.git/",
           "node_modules/",
+          "dist/",
+          "Session.vim",
+          ".venv/",
         },
       },
       pickers = {
