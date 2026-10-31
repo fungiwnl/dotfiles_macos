@@ -9,7 +9,7 @@
 	zeroPaddedFilemode = ignore
 	badTimezone = ignore
 # Sign with SSH keys; the key and commit.gpgSign live in ~/.gitconfig-local
-# (written by setup_ssh.zsh) since key paths are machine-specific.
+# (written by scripts/setup_ssh.zsh) since key paths are machine-specific.
 [gpg]
 	format = ssh
 [include]

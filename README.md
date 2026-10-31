@@ -13,7 +13,7 @@ Clone to `~/dotfiles_macos`: some aliases (e.g. `bbd`) assume that path.
 
 `./install` syncs the `dotbot` submodule and runs `dotbot -c install.conf.yaml`.
 It's safe to re-run: links are relinked and broken links in `~` are cleaned.
-Two steps are interactive (`setup_ssh.zsh`, `setup_npmrc.sh`) and will prompt
+Two steps are interactive (`scripts/setup_ssh.zsh`, `scripts/setup_npmrc.sh`) and will prompt
 for input.
 
 `setup.zsh` is an optional interactive wrapper that asks for environment
@@ -34,11 +34,11 @@ settings before running the same install.
 Shell steps run in this order:
 
 1. `macos`: `defaults write` tweaks (Finder, screenshots, key repeat, …)
-2. `setup_homebrew.zsh`: installs Homebrew, sets zsh as the login shell, runs `brew bundle` on `Brewfile`
-3. `setup_tmux_plugins.sh`: TPM and tmux plugins, checked out at pinned commits
-4. `setup_gcloud.zsh`: Google Cloud SDK (pinned version, checksum-verified)
-5. `setup_ssh.zsh`: creates an ed25519 key and a git host alias, and uses it to sign commits *(interactive)*
-6. `setup_npmrc.sh`: npm hardening plus `~/.npmrc` auth for GitHub Packages *(interactive)*
+2. `scripts/setup_homebrew.zsh`: installs Homebrew, sets zsh as the login shell, runs `brew bundle` on `Brewfile`
+3. `scripts/setup_tmux_plugins.sh`: TPM and tmux plugins, checked out at pinned commits
+4. `scripts/setup_gcloud.zsh`: Google Cloud SDK (pinned version, checksum-verified)
+5. `scripts/setup_ssh.zsh`: creates an ed25519 key and a git host alias, and uses it to sign commits *(interactive)*
+6. `scripts/setup_npmrc.sh`: npm hardening plus `~/.npmrc` auth for GitHub Packages *(interactive)*
 7. spicetify apply
 
 powerlevel10k comes from the Homebrew formula (`brew "powerlevel10k"`).
@@ -65,7 +65,7 @@ powerlevel10k comes from the Homebrew formula (`brew "powerlevel10k"`).
 
 ```
 install, install.conf.yaml   dotbot entry point and config
-setup_*.zsh / *.sh           one-off setup steps called by install
+setup.zsh                    optional interactive wrapper around install
 macos                        macOS defaults
 Brewfile                     Homebrew bundle (brew, cask, mas)
 .zshrc, zshrc/               zsh entry point and modules
@@ -73,7 +73,7 @@ Brewfile                     Homebrew bundle (brew, cask, mas)
 gitconfig, gitconfig-office  global git config
 .githooks/                    repo git hooks (gitleaks pre-commit)
 .config/                     app configs (nvim, aerospace, sketchybar, tmux, …)
-scripts/                     misc helper scripts
+scripts/                     setup steps called by install (setup_*) and misc helpers
 dotbot/                      dotbot submodule
 ```
 
@@ -118,5 +118,5 @@ picked up automatically.
 Some files are gitignored and are used only when present:
 
 - `certs/*.pem`: corporate CA certs, linked into `~/.ssh/` if present
-- `setup_repos.zsh`: clones work repos, run by install if present
+- `scripts/setup_repos.zsh`: clones work repos, run by install if present
 - `zshrc/<name>.sh`: machine-local shell config

@@ -42,22 +42,22 @@
     - command: [git config core.hooksPath .githooks, Enabling repo git hooks]
       stdout: true
       stderr: true
-    - command: [zsh setup_homebrew.zsh, Installing homebrew]
+    - command: [zsh scripts/setup_homebrew.zsh, Installing homebrew]
       stdout: true
       stderr: true
-    - command: [bash setup_tmux_plugins.sh, Installing tmux plugins]
+    - command: [bash scripts/setup_tmux_plugins.sh, Installing tmux plugins]
       stdout: true
       stderr: true
-    - command: [zsh setup_gcloud.zsh, Installing Google Cloud CLI]
+    - command: [zsh scripts/setup_gcloud.zsh, Installing Google Cloud CLI]
       stdout: true
       stderr: true
-    - command: [zsh -i setup_ssh.zsh, Setting up SSH]
+    - command: [zsh -i scripts/setup_ssh.zsh, Setting up SSH]
       stdout: true
       stderr: true
-    - command: [bash -i setup_npmrc.sh, Setting up .npmrc]
+    - command: [bash -i scripts/setup_npmrc.sh, Setting up .npmrc]
       stdout: true
       stderr: true
-    - command: [if test -f setup_repos.zsh; then zsh setup_repos.zsh; fi, Cloning repos]
+    - command: [if test -f scripts/setup_repos.zsh; then zsh scripts/setup_repos.zsh; fi, Cloning repos]
       stdout: true
       stderr: true
     - command: [if command -v spicetify >/dev/null 2>&1; then spicetify backup apply; fi, Applying Spicetify]
