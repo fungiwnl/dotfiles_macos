@@ -130,10 +130,6 @@ Y = ['main', 'secondary']
 Z = ['main', 'secondary']
 
 [[on-window-detected]]
-if.app-id = 'org.alacritty'
-run = 'move-node-to-workspace 1 --focus-follows-window'
-
-[[on-window-detected]]
 if.app-id = 'com.brave.Browser'
 run = 'move-node-to-workspace 2 --focus-follows-window'
 

@@ -41,7 +41,7 @@ return {
     },
   },
 
-  -- default to Catppuccin Mocha so Neovim matches Ghostty/OpenCode
+  -- default to Catppuccin Mocha so Neovim matches Ghostty
   {
     "LazyVim/LazyVim",
     opts = {
