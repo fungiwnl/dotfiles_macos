@@ -1,0 +1,32 @@
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "permissions": {
+    "deny": [
+      "Bash(sh)",
+      "Bash(bash)",
+      "Bash(zsh)",
+      "Bash(sh -s *)",
+      "Bash(bash -s *)",
+      "Bash(zsh -s *)",
+      "Bash(npx *)",
+      "Bash(bunx *)",
+      "Bash(pnpm dlx *)",
+      "Bash(npm exec *)"
+    ]
+  },
+  "model": "opus",
+  "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium",
+      "autoCompactWindow": 400000
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark-ansi",
+  "agentPushNotifEnabled": true,
+  "switchModelsOnFlag": false
+}
