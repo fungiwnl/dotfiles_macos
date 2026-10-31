@@ -1,4 +1,6 @@
 eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(pyenv init --no-rehash -)"
+eval "$(direnv hook zsh)"
 source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
@@ -32,13 +34,17 @@ alias vi="nvim"
 alias vim="nvim"
 alias ta="tmux attach"
 alias td="tmux detach"
+alias tarc="tmux attach -t rc"
 alias diff="diff --color"
 alias lg="lazygit"
-alias bbd="brew bundle dump --describe --file=~/dotfiles_macos/Brewfile --force"
+alias ld="lazydocker"
+alias bbd="brew bundle dump --file=~/dotfiles_macos/Brewfile --force"
 alias glog='git log --oneline | fzf --preview "git show --color=always {1}"'
 alias fkill='kill -9 $(ps aux | fzf -m | awk "{print $2}")'
 alias screenrecord="osascript -e 'tell application \"QuickTime Player\" to activate' -e 'tell application \"QuickTime Player\" to start (new screen recording)'"
 alias force-update="bash ~/dotfiles_macos/scripts/force-update.sh"
+alias ip='curl -fsS --max-time 5 https://api.ipify.org | tee >(pbcopy) && echo'
+alias weather="curl wttr.in"
 
 # Toggle sleep entirely (incl. lid closed, on battery). caffeinate can't stop clamshell sleep.
 nosleep_toggle() {
@@ -104,3 +110,6 @@ google() {
     query=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote_plus(" ".join(sys.argv[1:])))' "$@")
     open -a "Brave Browser" "https://www.google.com/search?q=$query"
 }
+
+# Go
+export PATH="$PATH:$HOME/go/bin"

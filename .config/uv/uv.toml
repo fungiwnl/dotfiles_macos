@@ -1,0 +1,2 @@
+# Skip package versions uploaded less than 7 days ago (supply-chain hardening).
+exclude-newer = "7 days"

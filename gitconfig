@@ -1,7 +1,19 @@
 [user]
 	email = 70641699+fungiwnl@users.noreply.github.com
 	name = Brian Fung
-[safe]
-	directory = /Users/bfung/work/ko-ui-lib
+# Reject corrupt/malformed objects on fetch and push. Ignore the two benign
+# quirks some old public repos carry so clones of those still work.
+[transfer]
+	fsckObjects = true
+[fetch "fsck"]
+	zeroPaddedFilemode = ignore
+	badTimezone = ignore
+# Sign with SSH keys; the key and commit.gpgSign live in ~/.gitconfig-local
+# (written by setup_ssh.zsh) since key paths are machine-specific.
+[gpg]
+	format = ssh
 [include]
 	path = ~/.gitconfig-office
+# Machine-specific settings (e.g. safe.directory); not tracked.
+[include]
+	path = ~/.gitconfig-local

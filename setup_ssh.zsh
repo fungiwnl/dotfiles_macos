@@ -22,7 +22,8 @@ if [[ -f "$KEY_PATH" ]]; then
 fi
 
 echo "🔐 Generating SSH key..."
-ssh-keygen -t ed25519 -C "$EMAIL" -f "$KEY_PATH" -N "" -q
+echo "🔒 Choose a passphrase (stored in the macOS keychain, so you only type it once)."
+ssh-keygen -t ed25519 -C "$EMAIL" -f "$KEY_PATH" -q
 
 echo "🚀 Starting ssh-agent..."
 eval "$(ssh-agent -s)"
@@ -51,6 +52,16 @@ else
   echo "✅ Added. Use 'git@${HOST_ALIAS}:user/repo.git' as your repo URL."
 fi
 
+echo "✍️  Using this key to sign commits (machine-local ~/.gitconfig-local)..."
+git config --file ~/.gitconfig-local user.signingkey "${KEY_PATH}.pub"
+git config --file ~/.gitconfig-local commit.gpgSign true
+git config --file ~/.gitconfig-local tag.gpgSign true
+# Lets `git log --show-signature` verify our own signatures locally.
+ALLOWED_SIGNERS="${HOME}/.config/git/allowed_signers"
+mkdir -p "$(dirname "$ALLOWED_SIGNERS")"
+echo "$(git config user.email) $(cat "${KEY_PATH}.pub")" >>"$ALLOWED_SIGNERS"
+git config --file ~/.gitconfig-local gpg.ssh.allowedSignersFile "$ALLOWED_SIGNERS"
+
 echo ""
 echo "🚀 SSH key '${KEYNAME}' setup complete."
 echo "📌 Your public key has been copied to the clipboard."
@@ -60,5 +71,6 @@ echo "🔗 Please add it to your GitHub account here:"
 echo "    👉 https://github.com/settings/keys"
 echo ""
 echo "🔒 Paste the public key into the 'SSH key' field, give it a name (e.g., ${KEYNAME}), and save."
+echo "✍️  Add it a second time with Key type 'Signing Key' so signed commits show as Verified."
 
 read -rp "✅ Press Enter after you've added the key to GitHub to continue..."

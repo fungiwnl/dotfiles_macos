@@ -5,10 +5,11 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
-export ZSH=$HOME/.oh-my-zsh
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(fnm env --use-on-cd)"
-#source $ZSH/oh-my-zsh.sh
 
 export PATH="/usr/local/sbin:$PATH"
+
+# Load SSH keys whose passphrases are in the macOS keychain (needed for push and commit signing).
+ssh-add --apple-load-keychain -q 2>/dev/null

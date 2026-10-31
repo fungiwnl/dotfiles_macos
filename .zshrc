@@ -1,6 +1,6 @@
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-for FILE in ~/zshrc/*; do
+for FILE in ~/zshrc/*.sh; do
     source $FILE
 done
 
@@ -31,3 +31,6 @@ if [[ -n "$file" ]]; then
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Created by `pipx` on 2026-03-28 21:38:26
+export PATH="$PATH:/Users/bfung/.local/bin"

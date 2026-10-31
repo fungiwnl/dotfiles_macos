@@ -1,13 +1,12 @@
-tap "anomalyco/tap"
-tap "facebook/fb"
-tap "felixkratz/formulae"
-tap "hashicorp/tap"
-tap "leoafarias/fvm"
-tap "nikitabobko/tap"
-tap "rbenv/tap"
-tap "romkatv/powerlevel10k"
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "hashicorp/tap", trusted: true
+tap "nikitabobko/tap", trusted: true
 # Run your GitHub Actions locally
 brew "act"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
 # CLI toolkit for working with Akamai's APIs
 brew "akamai"
 # C parser in Python
@@ -60,6 +59,8 @@ brew "lima"
 brew "colima", restart_service: :changed
 # DuckDuckGo from the terminal
 brew "ddgr"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Utility to configure multi-display resolutions and arrangements
 brew "displayplacer"
 # Pack, ship and run any application as a lightweight container
@@ -76,10 +77,10 @@ brew "docutils"
 brew "libidn2"
 # Library to load and enumerate PKCS#11 modules
 brew "p11-kit"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # GNU Emacs text editor
 brew "emacs"
 # Modern, maintained replacement for ls
@@ -104,20 +105,26 @@ brew "ffmpeg"
 brew "ffmpeg@4"
 # Fast and simple Node.js version manager
 brew "fnm"
+# Manage Flutter SDK versions per project
+brew "fvm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
+# Audit git repos for secrets
+brew "gitleaks"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
+# Render markdown on the CLI
+brew "glow"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # Like cURL, but for gRPC
 brew "grpcurl"
 # Flexible API to implement spellchecking in GTK+ applications
 brew "gspell"
-# GUI toolkit
-brew "gtk+"
 # GNU Ubiquitous Intelligent Language for Extensions
 brew "guile"
 # Hex editor for the terminal with vi-like interface
@@ -140,6 +147,12 @@ brew "jmeter"
 brew "jq"
 # Modern load testing tool, using Go and JavaScript
 brew "k6"
+# Run local Kubernetes cluster in Docker
+brew "kind"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Tool for managing JavaScript projects with multiple packages
@@ -182,6 +195,8 @@ brew "newrelic-cli"
 brew "nghttp2"
 # Libraries for security-enabled client and server applications
 brew "nss"
+# HTTP load generator, inspired by rakyll/hey with tui animation
+brew "oha"
 # Create, run, and share large language models (LLMs)
 brew "ollama"
 # Development kit for the Java programming language
@@ -192,6 +207,8 @@ brew "parallel"
 brew "pipx"
 # Fast, disk space efficient package manager
 brew "pnpm"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
 # Theme for zsh
 brew "powerlevel10k"
 # Python version management
@@ -228,28 +245,28 @@ brew "tldr"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Code review TUI with vim keybindings
+brew "tuicr"
+# Markup-based typesetting system
+brew "typst"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# HTTP load testing tool and library
+brew "vegeta"
 # Pager/text based browser
 brew "w3m"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
 brew "yarn"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar"
 # Terraform
 brew "hashicorp/tap/terraform"
-# Simple cli to manage Flutter SDK versions per project
-brew "leoafarias/fvm/fvm"
-# SSL/TLS cryptography library
-brew "rbenv/tap/openssl@1.0"
 # Command-line interface for 1Password
 cask "1password-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
-# GPU-accelerated terminal emulator
-cask "alacritty"
 # Automatic tiling window manager similar to xmonad
 cask "amethyst"
 # Always on top window preview
@@ -264,16 +281,17 @@ cask "brave-browser"
 cask "bruno"
 # Anthropic's official Claude AI desktop app
 cask "claude"
-# Terminal-based AI coding assistant
-cask "claude-code"
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
 # UI toolkit for building applications for mobile, web and desktop
 cask "flutter"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
+cask "font-lato"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Git client focusing on productivity
+cask "gitkraken"
 # Desktop automation application
 cask "hammerspoon"
 # Multi-platform web browser
@@ -282,10 +300,14 @@ cask "microsoft-edge"
 cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Open source virtual/remote desktop application
+cask "rustdesk"
 # Music streaming service
 cask "spotify"
 # Manage and install Squid proxy cache
 cask "squidman"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # Virtualiser for arm64 hardware
 cask "virtualbox"
 # Open-source code editor
@@ -299,3 +321,5 @@ mas "Pages", id: 409201541
 mas "Xcode", id: 497799835
 vscode "amazonwebservices.amazon-q-vscode"
 vscode "solomonkinard.git-blame"
+go "sigs.k8s.io/kind"
+npm "corepack"
